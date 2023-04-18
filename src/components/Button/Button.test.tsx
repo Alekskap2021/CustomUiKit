@@ -2,12 +2,12 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import Button, { ButtonProps } from "./Button";
+import Button, { ButtonProps, LinkProps } from "./Button";
 
 describe("Button", () => {
   const mockProps: ButtonProps = {
     label: "Test Button",
-    form: "brick",
+    border: "brick",
     size: "m",
     view: "primary",
     fullSize: false,
@@ -16,11 +16,23 @@ describe("Button", () => {
     disabled: false,
   };
 
+  const asLinkProps: LinkProps = {
+    label: "Link",
+    as: "link",
+  };
+
   test("renders with label text", () => {
     const { getByText } = render(<Button {...mockProps} />);
     const buttonText = getByText("Test Button");
     expect(buttonText).toBeInTheDocument();
   });
+
+  //   test("renders with as prop equal link", () => {
+  //     const { getByText } = render(<Button {...asLinkProps} />);
+  //     const buttonText = getByText("Test Button");
+  //     expect(buttonText).toBeInTheDocument();
+  //     expect(buttonText.tagName.toLowerCase()).toBe("a");
+  //   });
 
   test("click event is triggered", () => {
     const handleClick = jest.fn();

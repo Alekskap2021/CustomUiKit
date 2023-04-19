@@ -8,7 +8,8 @@ export default {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div style={{ margin: "5em" }}>
+      <div style={{ margin: "5em 0" }}>
+        {/* <Story /> */}
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium voluptates
           laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit voluptatibus
@@ -20,7 +21,7 @@ export default {
           repudiandae totam, rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque
           molestiae tenetur harum nam!
         </p>
-        <Story />
+        <Story style={{ margin: "0 auto" }} />
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium voluptates
           laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit voluptatibus
@@ -32,6 +33,7 @@ export default {
           repudiandae totam, rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque
           molestiae tenetur harum nam!
         </p>
+        {/* <Story /> */}
       </div>
     ),
   ],
@@ -42,5 +44,5 @@ const Template: ComponentStory<typeof Dropdown> = (args) => <Dropdown {...args} 
 export const HelloWorld = Template.bind({});
 HelloWorld.args = {
   label: "Click me!",
-  child: "Hello world!",
+  child: "Hello world! Hello world Hello worldHello world",
 };

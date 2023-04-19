@@ -20,6 +20,7 @@ export interface ButtonProps
 }
 export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>, ButtonLinkProps {
   as?: "link";
+  href: string;
 }
 
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps | LinkProps>(

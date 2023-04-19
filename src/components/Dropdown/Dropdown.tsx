@@ -5,28 +5,50 @@ import { calcPreferSide } from "./helpers";
 
 export interface DropdownProps extends ButtonProps {
   child: ReactNode;
-  bodyClassName?: string;
+  tooltipClassName?: string;
   theme?: "dark" | "light";
   borderStyle?: string;
+  preferSide?: "top" | "right" | "bottom" | "left" | "auto";
+  withArrow?: boolean;
+  className?: string;
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
-  const { child, bodyClassName, label, theme = "light", borderStyle, as, ...otherProps } = props;
+  const {
+    child,
+    className,
+    tooltipClassName: tipClass,
+    label,
+    theme = "light",
+    borderStyle,
+    as,
+    preferSide = "auto",
+    withArrow = true,
+    ...otherProps
+  } = props;
+
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const dropdownBtnRef = useRef<HTMLButtonElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const parentElRef = useRef<HTMLDivElement>(null);
+
+  const mainClassNames = ["dropdown"];
+  const tooltipClassNames = ["dropdown__body"];
+  const btnClassName = className ? className : "";
 
   useEffect(() => {
-    calcPreferSide(dropdownBtnRef, tooltipRef);
+    const isBottom = parentElRef.current.classList.contains("bottom");
+    console.log(parentElRef.current.classList);
+    preferSide === "auto" && calcPreferSide({ btnRef, tooltipRef, parentElRef });
+
     document.addEventListener("click", onDocumentHandler);
     return () => document.removeEventListener("click", onDocumentHandler);
-  }, []);
+  }, [preferSide, isOpened]);
 
-  const mainClassNames = isOpened ? [`dropdown dropdown_active`] : ["dropdown"];
-  const dropdownClassNames = ["dropdown__body"];
-
-  theme && dropdownClassNames.push(theme);
-  bodyClassName && dropdownClassNames.push(bodyClassName);
+  tooltipClassNames.push(theme);
+  isOpened && mainClassNames.push("dropdown_active");
+  preferSide !== "auto" && mainClassNames.push(preferSide);
+  tipClass && tooltipClassNames.push(tipClass);
 
   function onDocumentHandler(e: Event) {
     const isDropdownArea = !!(e.target as HTMLElement).closest(".dropdown");
@@ -36,28 +58,23 @@ const Dropdown: FC<DropdownProps> = (props) => {
     }
   }
 
-  function onDropdownHandler() {
-    calcPreferSide(dropdownBtnRef, tooltipRef);
-    setIsOpened((prev) => !prev);
-  }
-
   return (
-    <div className={mainClassNames.join(" ")} style={{ margin: "0 auto" }}>
+    <div className={mainClassNames.join(" ")} ref={parentElRef} style={{ marginLeft: "auto" }}>
       <Button
-        className="dropdown__btn"
+        className={`dropdown__btn ${btnClassName}`}
         label={label}
-        ref={dropdownBtnRef}
-        onClick={onDropdownHandler}
+        ref={btnRef}
+        onClick={() => setIsOpened((prev) => !prev)}
         {...otherProps}
       />
 
-      <div className={dropdownClassNames.join(" ")} ref={tooltipRef}>
-        <div className="dropdown__wrapper" style={{ border: borderStyle }}>
-          {child}
-          <span className="dropdown__arrow" style={{ border: borderStyle }}></span>
-        </div>
+      <div className={tooltipClassNames.join(" ")} ref={tooltipRef}>
+        {child}
       </div>
+
+      {withArrow && <span className="dropdown__arrow" style={{ border: borderStyle }}></span>}
     </div>
   );
 };
+
 export default Dropdown;

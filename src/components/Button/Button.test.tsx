@@ -19,6 +19,7 @@ describe("Button", () => {
   const asLinkProps: LinkProps = {
     label: "Link",
     as: "link",
+    href: "/",
   };
 
   test("renders with label text", () => {
@@ -27,12 +28,13 @@ describe("Button", () => {
     expect(buttonText).toBeInTheDocument();
   });
 
-  //   test("renders with as prop equal link", () => {
-  //     const { getByText } = render(<Button {...asLinkProps} />);
-  //     const buttonText = getByText("Test Button");
-  //     expect(buttonText).toBeInTheDocument();
-  //     expect(buttonText.tagName.toLowerCase()).toBe("a");
-  //   });
+  test("renders with as prop equal link", () => {
+    const { getByTestId } = render(<Button {...asLinkProps} data-testid="testid" />);
+    const linkElem = getByTestId("testid");
+    expect(linkElem).toBeInTheDocument();
+    expect(linkElem.tagName.toLowerCase()).toBe("a");
+    expect(linkElem).toHaveAttribute("href");
+  });
 
   test("click event is triggered", () => {
     const handleClick = jest.fn();

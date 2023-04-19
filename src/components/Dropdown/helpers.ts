@@ -1,27 +1,44 @@
-export function calcPreferSide(
-  btnRef: React.RefObject<HTMLButtonElement>,
-  tooltipRef: React.RefObject<HTMLDivElement>
-) {
-  if (document && btnRef.current && tooltipRef.current) {
+interface calcPreferSideProps {
+  btnRef: React.RefObject<HTMLButtonElement>;
+  tooltipRef: React.RefObject<HTMLDivElement>;
+  parentElRef: React.RefObject<HTMLDivElement>;
+  //   classList: DOMTokenList;
+}
+
+export function calcPreferSide({
+  btnRef,
+  tooltipRef,
+  parentElRef,
+}: //   classList,
+calcPreferSideProps) {
+  if (document && btnRef.current && tooltipRef.current && parentElRef.current) {
+    //   DOM elems
+    const tooltip = tooltipRef.current;
+    const triggerBtn = btnRef.current;
+    const parentEl = parentElRef.current;
+
+    //   Inirial coords
     const {
-      width: parentWidth,
       height: parentHeight,
+      width: parentWidth,
       right,
       bottom,
       left: distanceToLeft,
       top: distanceToTop,
-    } = btnRef.current.getBoundingClientRect();
+    } = triggerBtn.getBoundingClientRect();
+
+    const { left: tooltipToLeft, right: tooltipRight } = tooltip.getBoundingClientRect();
 
     const clientW = document.documentElement.clientWidth;
     const clientH = document.documentElement.clientHeight;
     const distanceToRight = clientW - right;
     const distanceToBottom = clientH - bottom;
 
-    const isDropdownActive = btnRef.current
-      .closest(".dropdown")
-      ?.classList.contains("dropdown_active");
+    //   Calc prefer sides
     const isOrientY = Math.max(clientW, clientH) === clientH;
     const isOrientX = Math.max(clientW, clientH) === clientW;
+    const isLeftClipped = tooltipToLeft <= 0;
+    const isRightClipped = clientW - tooltipRight <= 0;
     const isPreferTop = isOrientX && Math.max(distanceToBottom, distanceToTop) === distanceToTop;
     const isPreferBottom =
       isOrientX && Math.max(distanceToBottom, distanceToTop) === distanceToBottom;
@@ -29,44 +46,25 @@ export function calcPreferSide(
     const isPreferRight =
       isOrientY && Math.max(distanceToLeft, distanceToRight) === distanceToRight;
 
-    if (isPreferTop && !isDropdownActive) {
-      tooltipRef.current.style.cssText += `
-	  	top: -20%;
-  	  	left: 50%;
-  	  	transform: translate(-50%, -100%);
-	  `;
+    if (isPreferTop) {
+      parentEl.classList.remove("button");
+      parentEl.classList.add("top");
     }
-
-    if (isPreferBottom && !isDropdownActive) {
-      tooltipRef.current.style.cssText += `
-	      bottom: -20%;
-  		  left: 50%;
-  		  transform: translate(-50%, 100%);
-		`;
+    if (isPreferBottom) {
+      parentEl.classList.add("bottom");
     }
+    if (isPreferLeft) parentEl.classList.add("left");
+    if (isPreferRight) parentEl.classList.add("right");
 
-    if (isPreferLeft && !isDropdownActive) {
-      tooltipRef.current.style.cssText += `
-	      left: -10%;
-  		  top: 50%;
-  		  transform: translate(-100%, -50%);
-	    `;
+    if (isLeftClipped && isPreferTop) {
+      tooltip.classList.add("clip-left");
     }
-
-    if (isPreferRight && !isDropdownActive) {
-      tooltipRef.current.style.cssText += `
-	        right: -10%;
-  	        top: 50%;
-  	        transform: translate(100%, -50%);
-		  `;
+    if (isLeftClipped && isPreferBottom) {
+      tooltip.classList.add("clip-left");
     }
-
-    console.log("isOrientY", isOrientY);
-    console.log("isOrientX", isOrientX);
-    console.log("isPreferTop", isPreferTop);
-    console.log("isPreferBottom", isPreferBottom);
-    console.log("isPreferLeft", isPreferLeft);
-    console.log("isPreferRight", isPreferRight);
+    if (isRightClipped && isPreferTop) {
+      tooltip.classList.add("clip-right");
+    }
   } else {
     throw new Error(
       "Error in calcPreferSide func. Check that document object is defined and ref to DOM elements is exist"

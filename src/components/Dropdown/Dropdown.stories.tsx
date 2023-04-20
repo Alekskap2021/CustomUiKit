@@ -8,8 +8,14 @@ export default {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div style={{ margin: "5em 0" }}>
-        {/* <Story /> */}
+      <div style={{ margin: "1em 0" }}>
+        <div
+          className=""
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+        >
+          <Story style={{ margin: "0 auto" }} />
+          <Story style={{ margin: "0 auto" }} />
+        </div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium voluptates
           laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit voluptatibus
@@ -21,7 +27,15 @@ export default {
           repudiandae totam, rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque
           molestiae tenetur harum nam!
         </p>
-        <Story style={{ margin: "0 auto" }} />
+        <div
+          className=""
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+        >
+          <Story style={{ margin: "0 auto" }} />
+          <Story style={{ margin: "0 auto" }} />
+          <Story style={{ margin: "0 auto" }} />
+        </div>
+
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium voluptates
           laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit voluptatibus

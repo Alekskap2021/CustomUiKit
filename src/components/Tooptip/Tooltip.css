@@ -1,5 +1,8 @@
 :root {
-  --color-bg: #fff;
+  --color-tooltip-white: #fff;
+  --color-tooltip-dark: #212121;
+  --color-tooltip-dark-transparent: rgba(33, 33, 33, 0.2);
+  --transition-delay: 0.3s;
 }
 
 .tooltip {
@@ -11,7 +14,7 @@
 .tooltip__body {
   box-sizing: border-box;
   padding: 11px 16px;
-  background-color: var(--color-bg);
+  background-color: var(--color-tooltip-white);
 
   width: max-content;
   height: max-content;
@@ -23,13 +26,12 @@
 
   text-align: center;
   position: absolute;
-  /* left: 50%;
-  transform: translate(-50%, -100%); */
+
   z-index: 2;
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-delay) ease;
 }
 
 .tooltip__arrow {
@@ -40,12 +42,12 @@
   width: 11px;
   height: 11px;
 
-  background-color: var(--color-bg);
+  background-color: var(--color-tooltip-white);
   transform-origin: center;
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-delay) ease;
 
   background-color: transparent;
 }
@@ -55,7 +57,7 @@
   position: absolute;
   width: 11px;
   height: 11px;
-  background-color: var(--color-bg);
+  background-color: var(--color-tooltip-white);
 }
 
 .tooltip__trigger {
@@ -164,13 +166,13 @@
 /* Themes */
 .tooltip__body.dark .tooltip__wrapper,
 .tooltip__body.dark .tooltip__arrow {
-  background-color: #212121;
-  color: #fff;
+  background-color: var(--color-tooltip-dark);
+  color: var(--color-tooltip-white);
 }
 
 .tooltip__body.light .tooltip__wrapper,
 .tooltip__body.light .tooltip__arrow {
-  background-color: #fff;
-  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.2);
-  color: #212121;
+  background-color: var(--color-tooltip-white);
+  box-shadow: 12px 12px 2px 1px var(--color-tooltip-dark);
+  color: var(--color-tooltip-dark);
 }

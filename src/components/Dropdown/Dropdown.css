@@ -1,5 +1,8 @@
 :root {
-  --color-bg: #fff;
+  --color-tooltip-white: #fff;
+  --color-tooltip-dark: #212121;
+  --color-tooltip-dark-transparent: rgba(33, 33, 33, 0.2);
+  --transition-delay: 0.3s;
 }
 
 .dropdown {
@@ -10,7 +13,7 @@
 .dropdown__body {
   box-sizing: border-box;
   padding: 11px 16px;
-  background-color: var(--color-bg);
+  background-color: var(--color-tooltip-white);
 
   width: max-content;
   height: max-content;
@@ -28,23 +31,23 @@
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-delay) ease;
 }
 
 .dropdown__arrow {
   position: absolute;
 
-  z-index: 2;
+  z-index: 1;
   display: block;
   width: 11px;
   height: 11px;
 
-  background-color: var(--color-bg);
+  background-color: var(--color-tooltip-white);
   transform-origin: center;
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-delay) ease;
 }
 
 .dropdown_active .dropdown__body,
@@ -126,22 +129,21 @@
 /* Themes */
 .dropdown.dark .dropdown__body,
 .dropdown.dark .dropdown__arrow {
-  background-color: #212121;
-  /* background-color: rgb(33, 33, 33, 0.3); */
-  color: #fff;
+  background-color: var(--color-tooltip-dark);
+  color: var(--color-tooltip-white);
 }
 
 .dropdown.light .dropdown__body {
-  background-color: #fff;
-  border: 1px solid rgba(33, 33, 33, 0.2);
-  color: #212121;
+  background-color: var(--color-tooltip-white);
+  border: 1px solid var(--color-tooltip-dark-transparent);
+  color: var(--color-tooltip-dark);
 }
 
 .dropdown.light.top .dropdown__arrow {
-  border-bottom: 1px solid rgba(33, 33, 33, 0.2);
-  border-right: 1px solid rgba(33, 33, 33, 0.2);
+  border-bottom: 1px solid var(--color-tooltip-dark-transparent);
+  border-right: 1px solid var(--color-tooltip-dark-transparent);
 }
 .dropdown.light.bottom .dropdown__arrow {
-  border-top: 1px solid rgba(33, 33, 33, 0.2);
-  border-left: 1px solid rgba(33, 33, 33, 0.2);
+  border-top: 1px solid var(--color-tooltip-dark-transparent);
+  border-left: 1px solid var(--color-tooltip-dark-transparent);
 }

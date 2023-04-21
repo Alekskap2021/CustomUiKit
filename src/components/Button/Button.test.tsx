@@ -2,10 +2,11 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import Button, { ButtonProps, LinkProps } from "./Button";
+import { Button } from "./Button";
+import { ButtonTypes, LinkTypes } from "../../types/ButtonTypes";
 
 describe("Button", () => {
-  const mockProps: ButtonProps = {
+  const mockProps: ButtonTypes = {
     label: "Test Button",
     border: "brick",
     size: "m",
@@ -16,7 +17,7 @@ describe("Button", () => {
     disabled: false,
   };
 
-  const asLinkProps: LinkProps = {
+  const asLinkProps: LinkTypes = {
     label: "Link",
     as: "link",
     href: "/",
@@ -63,7 +64,7 @@ describe("Button", () => {
   });
 
   test("applies full-size class if fullSize prop is true", () => {
-    const mockPropsWithFullSize: ButtonProps = {
+    const mockPropsWithFullSize: ButtonTypes = {
       ...mockProps,
       fullSize: true,
     };
@@ -79,7 +80,7 @@ describe("Button", () => {
   });
 
   test("applies clip class if clip prop is true", () => {
-    const mockPropsWithFullSize: ButtonProps = {
+    const mockPropsWithFullSize: ButtonTypes = {
       ...mockProps,
       clip: true,
     };
@@ -95,7 +96,7 @@ describe("Button", () => {
   });
 
   test("applies loading class if loading prop is true", () => {
-    const mockPropsWithFullSize: ButtonProps = {
+    const mockPropsWithFullSize: ButtonTypes = {
       ...mockProps,
       loading: true,
     };
@@ -111,7 +112,7 @@ describe("Button", () => {
   });
 
   test("applies disabled attribute if disabled prop is true", () => {
-    const mockPropsWithFullSize: ButtonProps = {
+    const mockPropsWithFullSize: ButtonTypes = {
       ...mockProps,
       disabled: true,
     };

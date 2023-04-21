@@ -2,15 +2,9 @@ interface calcPreferSideProps {
   btnRef: React.RefObject<HTMLButtonElement>;
   tooltipRef: React.RefObject<HTMLDivElement>;
   parentElRef: React.RefObject<HTMLDivElement>;
-  //   classList: DOMTokenList;
 }
 
-export function calcPreferSide({
-  btnRef,
-  tooltipRef,
-  parentElRef,
-}: //   classList,
-calcPreferSideProps) {
+export function calcPreferSide({ btnRef, tooltipRef, parentElRef }: calcPreferSideProps) {
   if (document && btnRef.current && tooltipRef.current && parentElRef.current) {
     //   DOM elems
     const tooltip = tooltipRef.current;
@@ -31,7 +25,6 @@ calcPreferSideProps) {
     const clientH = document.documentElement.clientHeight;
     const distanceToRight = clientW - right;
     const distanceToBottom = clientH - bottom;
-    console.log(parentEl.getBoundingClientRect());
 
     //   Calc prefer sides
     const isLeftClipped = tooltipToLeft <= 0;

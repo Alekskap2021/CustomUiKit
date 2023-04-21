@@ -1,14 +1,53 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Tooltip from "./Tooltip";
+import { Tooltip as MyTooltip } from "./Tooltip";
 
 export default {
   title: "ReactComponentLibrary/Tooltip",
-  component: Tooltip,
+  component: MyTooltip,
   tags: ["autodocs"],
+  argTypes: {
+    theme: {
+      description: "Тема для всплывающей подсказки. Определяет цвет заднего фона и текста",
+      defaultValue: "light",
+    },
+    borderStyle: {
+      description:
+        "Цвет и толщина обводки для подсказкию Задается в формате css. Например 1px solid red",
+      defaultValue: "",
+    },
+    tooltipClassName: {
+      description: "Передача класса элементу всплывающего окна для кастомизации извне",
+    },
+    children: {
+      description:
+        "Триггер для всплывающей подсказки. должен являтся DOM элементом. При передаче нескольких DOM элементов каждый из них будет являтся Tooltip",
+    },
+    tooltip: {
+      description:
+        "Окно всплывающей подсказки. Может быть как текстом, так и любой HTML структурой",
+    },
+    preferSide: {
+      description:
+        "Выбор стороны отображения подсказки относительно триггера. В значении auto автоматически считается и выбирается предпочтительная облать. При любых других значениях подскаска всегда отображется в выбранном месте",
+      defaultValue: "auto",
+    },
+    withArrow: {
+      description: "Определяет, нужно ли показывать стрелку, которая указывает на центр триггера",
+      defaultValue: true,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Выпадающая по наведению подсказка. Как триггер, так и сама пожсказка может являтся любой html структурой. Зоны роста - такие же, как у компонента Dropdown",
+      },
+    },
+  },
   decorators: [
     (Story) => (
-      <div style={{ margin: "5em 0" }}>
+      <div>
         <p>
           Lorem ipsum dolor sit amet consectetur <Story />
           elit. Pariatur illum in excepturi similique esse ducimus autem voluptate vel, reiciendis
@@ -45,13 +84,14 @@ export default {
   ],
 } as ComponentMeta<typeof Tooltip>;
 
-const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args} />;
+const Template: ComponentStory<typeof MyTooltip> = (args) => <MyTooltip {...args} />;
 
-export const HelloWorld = Template.bind({});
-HelloWorld.args = {
+export const Tooltip = Template.bind({});
+Tooltip.args = {
   tooltip: "Hello world!",
   children: (
     <span
+      className="someClass"
       style={{
         textDecoration: "underline",
         color: "blue",

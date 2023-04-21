@@ -7,6 +7,7 @@
   --color-danger-hover: #c4233e;
   --color-text-white: #fff;
   --color-text-dark: #212121;
+  --transition-delay: 0.3s;
 }
 
 /* Main class */
@@ -30,7 +31,7 @@ a.btn {
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-delay) ease;
   pointer-events: none;
 }
 

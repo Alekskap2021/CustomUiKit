@@ -1,25 +1,14 @@
-import React, { FC, ReactNode, useState, useEffect, useRef, createRef } from "react";
-import "./Tooltip.css";
-import Button from "../Button/Button";
+import React, { FC, useState, useEffect, useRef } from "react";
+
+import { TooltipTypes } from "../../types/TooltipTypes";
 import { calcPreferSide } from "../../helpers/CalcPreferSide";
-import { DropdownProps } from "../Dropdown/Dropdown";
 
-export interface TooltipProps extends DropdownProps {
-  children: ReactNode;
-  tooltip: ReactNode;
-  tooltipClassName?: string;
-  theme?: "dark" | "light";
-  borderStyle?: string;
-  preferSide?: "top" | "right" | "bottom" | "left" | "auto";
-  withArrow?: boolean;
-  className?: string;
-  label: string;
-}
+import cn from "classnames";
+import "./Tooltip.css";
 
-const Tooltip: FC<TooltipProps> = (props) => {
+export const Tooltip: FC<TooltipTypes> = (props) => {
   const {
     children,
-    className,
     tooltipClassName: tipClass,
     theme = "dark",
     borderStyle,
@@ -31,14 +20,18 @@ const Tooltip: FC<TooltipProps> = (props) => {
 
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [side, setSide] = useState<string>("");
+
   const btnRef = useRef<HTMLButtonElement>();
   const tooltipRef = useRef<HTMLDivElement>();
   const parentElRef = useRef<HTMLDivElement>();
 
+  // Effect for calc initial position at 1st render
   useEffect(() => {
     preferSide === "auto" && setSide(calcPreferSide({ btnRef, tooltipRef, parentElRef }));
   }, []);
 
+  // Effect for calc prefer side at every hover if we have preferSideProp in "auto".
+  // We have X/Y scroll at the document and other corner cases, so its necessary
   useEffect(() => {
     if (isOpened) {
       preferSide === "auto"
@@ -50,6 +43,7 @@ const Tooltip: FC<TooltipProps> = (props) => {
     return () => document.removeEventListener("mouseover", onDocumentHandler);
   }, [preferSide, isOpened]);
 
+  // Func for close tooltip if target !== tooltip
   function onDocumentHandler(e: Event) {
     const isDropdownArea = !!(e.target as HTMLElement).closest(".tooltip");
 
@@ -58,17 +52,12 @@ const Tooltip: FC<TooltipProps> = (props) => {
     }
   }
 
-  const mainClassNames = ["tooltip", side];
-  const tooltipClassNames = ["tooltip__body"];
-  const btnClassName = ["tooltip__trigger"];
-  className && btnClassName.push(className);
-  tipClass && tooltipClassNames.push(tipClass);
-  isOpened && mainClassNames.push("tooltip_active");
-
+  // Add necessary events && ref at children elem`s
   const myCustomChildren = React.Children.map(children, (el) => {
     if (!React.isValidElement(el)) {
       throw new Error("You should pass only valid react elements as children");
     }
+
     return React.cloneElement(el, {
       ...el.props,
       onMouseEnter: () => {
@@ -80,18 +69,16 @@ const Tooltip: FC<TooltipProps> = (props) => {
 
   return (
     <div
-      className={mainClassNames.join(" ")}
+      className={cn("tooltip", side, { tooltip_active: isOpened })}
       ref={parentElRef}
-      //   style={{ marginLeft: "auto" }}
+      {...otherProps}
     >
       {myCustomChildren}
 
-      <div className={tooltipClassNames.join(" ")} ref={tooltipRef}>
+      <div className={cn("tooltip__body", tipClass)} ref={tooltipRef}>
         {tooltip}
       </div>
       {withArrow && <span className="tooltip__arrow" style={{ border: borderStyle }}></span>}
     </div>
   );
 };
-
-export default Tooltip;

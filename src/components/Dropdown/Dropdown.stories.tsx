@@ -1,11 +1,60 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Dropdown from "./Dropdown";
+import { Dropdown as MyDropdown } from "./Dropdown";
 
 export default {
   title: "ReactComponentLibrary/Dropdown",
-  component: Dropdown,
+  component: MyDropdown,
   tags: ["autodocs"],
+  argTypes: {
+    theme: {
+      description: "Тема для всплывающей подсказки. Определяет цвет заднего фона и текста",
+      defaultValue: "light",
+    },
+    borderStyle: {
+      description:
+        "Цвет и толщина обводки для подсказкию Задается в формате css. Например 1px solid red",
+      defaultValue: "",
+    },
+    children: {
+      description:
+        "Контент всплывающей подсказки. Может быть как текстом, так и любой HTML структурой",
+    },
+    preferSide: {
+      description:
+        "Выбор стороны отображения подсказки относительно триггера. В значении auto автоматически считается и выбирается предпочтительная облать. При любых других значениях подскаска всегда отображется в выбранном месте",
+      defaultValue: "auto",
+    },
+    withArrow: {
+      description: "Определяет, нужно ли показывать стрелку, которая указывает на центр триггера",
+      defaultValue: true,
+    },
+    tooltipClassName: {
+      description: "Передача класса элементу всплывающего окна для кастомизации извне",
+    },
+    btnClassName: {
+      description: "Передача класса кнопке-триггеру для кастомизации извне",
+    },
+    label: { description: "Текст кнопки", defaultValue: "Click me!" },
+    border: { description: "Формат скругления", defaultValue: "brick" },
+    view: { description: "Цвет заднего фона", defaultValue: "primary" },
+    size: { description: "Размер шрифта и внутренних отступов", defaultValue: "m" },
+    loading: { description: "Смена контента внутри кнопки на loader", defaultValue: false },
+    disabled: { description: "Отключает все события и наведение на элементе", defaultValue: false },
+    clip: {
+      description: "Прозрачный фон, цвет текста внутри и обводка принимают значения view",
+      defaultValue: false,
+    },
+    fullSize: { description: "Растянуть элемент на 100% ширины родителя", defaultValue: false },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Выпадающая по клику подсказка. Может являтся любой html структурой. Зоны роста - добавить темы для скролла, дать возможность пользователю кастомизировать скролл извне. Добавить виды анимаций для появления всплывающей подсказки",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ margin: "1em 0" }}>
@@ -51,12 +100,12 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof Dropdown>;
+} as ComponentMeta<typeof MyDropdown>;
 
-const Template: ComponentStory<typeof Dropdown> = (args) => <Dropdown {...args} />;
+const Template: ComponentStory<typeof MyDropdown> = (args) => <MyDropdown {...args} />;
 
-export const HelloWorld = Template.bind({});
-HelloWorld.args = {
+export const Dropdown = Template.bind({});
+Dropdown.args = {
   label: "Click me!",
-  child: "Hello world! Hello world Hello worldHello world",
+  children: "some text",
 };

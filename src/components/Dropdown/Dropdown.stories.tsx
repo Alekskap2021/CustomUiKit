@@ -164,6 +164,19 @@ DropdownWithList.args = {
   ),
 };
 
+export const DropdownImage: Story<Pick<DropdownTypes, "children" | "preferSide">> = Template.bind(
+  {}
+);
+DropdownImage.args = {
+  preferSide: "right",
+  children: (
+    <img
+      src="https://winaero.com/blog/wp-content/uploads/2018/02/image-photos-png-icon.png"
+      alt="mock image"
+    />
+  ),
+};
+
 export const DropdownWithoutArrow: Story<Pick<DropdownTypes, "withArrow">> = Template.bind({});
 DropdownWithoutArrow.args = {
   withArrow: false,

@@ -10,7 +10,7 @@ export const Tooltip: FC<TooltipTypes> = (props) => {
   const {
     children,
     tooltipClassName: tipClass,
-    theme = "dark",
+    theme = "light",
     borderStyle,
     tooltip,
     preferSide = "auto",
@@ -69,7 +69,7 @@ export const Tooltip: FC<TooltipTypes> = (props) => {
 
   return (
     <div
-      className={cn("tooltip", side, { tooltip_active: isOpened })}
+      className={cn("tooltip", side, theme, { tooltip_active: isOpened })}
       ref={parentElRef}
       {...otherProps}
     >

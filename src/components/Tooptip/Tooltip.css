@@ -164,15 +164,31 @@
 }
 
 /* Themes */
-.tooltip__body.dark .tooltip__wrapper,
-.tooltip__body.dark .tooltip__arrow {
+.tooltip.dark .tooltip__body,
+.tooltip.dark .tooltip__arrow::after {
   background-color: var(--color-tooltip-dark);
   color: var(--color-tooltip-white);
 }
 
-.tooltip__body.light .tooltip__wrapper,
-.tooltip__body.light .tooltip__arrow {
+.tooltip.light .tooltip__body {
   background-color: var(--color-tooltip-white);
-  box-shadow: 12px 12px 2px 1px var(--color-tooltip-dark);
+  border: 1px solid var(--color-tooltip-dark-transparent);
   color: var(--color-tooltip-dark);
+}
+
+.tooltip.light.top .tooltip__arrow:after {
+  border-bottom: 1px solid var(--color-tooltip-dark-transparent);
+  border-right: 1px solid var(--color-tooltip-dark-transparent);
+}
+.tooltip.light.bottom .tooltip__arrow:after {
+  border-top: 1px solid var(--color-tooltip-dark-transparent);
+  border-left: 1px solid var(--color-tooltip-dark-transparent);
+}
+.tooltip.light.right .tooltip__arrow:after {
+  border-bottom: 1px solid var(--color-tooltip-dark-transparent);
+  border-left: 1px solid var(--color-tooltip-dark-transparent);
+}
+.tooltip.light.left .tooltip__arrow:after {
+  border-top: 1px solid var(--color-tooltip-dark-transparent);
+  border-right: 1px solid var(--color-tooltip-dark-transparent);
 }

@@ -43,20 +43,21 @@
 Вот пример того, что я имею ввиду:
 ```
 <>
-<Button
-className={cn("dropdown__btn", btnClassName)}
-label={label}
-ref={btnRef}
-as="button"
-onClick={() =>  setIsOpened((prev) => !prev)}
-{...otherProps}
-/>
-{createPortal(
-<TooltipWindow  className={cn({ "tooltip-window_active":  isOpened })}  ref={tooltipRef}>
-{children}
-</TooltipWindow>,
-document.body
-)}
+  <Button
+    className={cn("dropdown__btn", btnClassName)}
+    label={label}
+    ref={btnRef}
+    as="button"
+    onClick={() =>  setIsOpened((prev) => !prev)}
+    {...otherProps}
+  />
+  
+  {createPortal(
+    <TooltipWindow  className={cn({ "tooltip-window_active":  isOpened })}  ref={tooltipRef}>
+      {children}
+    </TooltipWindow>,
+    document.body
+  )}
 </>
 ```
 

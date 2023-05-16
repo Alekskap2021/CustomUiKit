@@ -6,14 +6,14 @@ import { DropdownTypes } from "../../types/DropdownTypes";
 const mainDecorator = (StoryFn) => {
   return (
     <div style={{ margin: "1em 0" }}>
-      <div
+      {/* <div
         className=""
         style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
       >
         <StoryFn />
         <StoryFn />
-      </div>
-      <p>
+      </div> */}
+      <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium voluptates
         laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit voluptatibus
         et. Voluptatem ipsa libero, velit soluta magnam sequi natus ad ut fugiat harum expedita
@@ -23,17 +23,10 @@ const mainDecorator = (StoryFn) => {
         nesciunt minus aperiam vel tenetur. Est nisi suscipit error corrupti repudiandae totam,
         rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque molestiae tenetur
         harum nam!
-      </p>
-      <div
-        className=""
-        style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
-      >
-        <StoryFn />
-        <StoryFn />
-        <StoryFn />
       </div>
+      {/* <StoryFn /> */}
 
-      <p>
+      <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium voluptates
         laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit voluptatibus
         et. Voluptatem ipsa libero, velit soluta magnam sequi natus ad ut fugiat harum expedita
@@ -42,8 +35,68 @@ const mainDecorator = (StoryFn) => {
         Officia debitis labore incidunt, fugiat, ipsa esse molestias optio dolores, repudiandae
         nesciunt minus aperiam vel tenetur. Est nisi suscipit error corrupti repudiandae totam,
         rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque molestiae tenetur
-        harum nam!
-      </p>
+        harum nam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium
+        voluptates laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit
+        voluptatibus et. Voluptatem ipsa libero, velit soluta magnam sequi natus ad ut fugiat harum
+        expedita tenetur at, aliquam odit. Eligendi aliquid ex voluptatem, accusamus quos magni
+        omnis quas ea numquam ut excepturi nostrum optio alias nisi aut. Quas reiciendis ipsa
+        sapiente beatae! Officia debitis labore incidunt, fugiat, ipsa esse molestias optio dolores,
+        repudiandae nesciunt minus aperiam vel tenetur. Est nisi suscipit error corrupti repudiandae
+        totam, rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque molestiae
+        tenetur harum nam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
+        accusantium voluptates laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero
+        impedit voluptatibus et. Voluptatem ipsa libero, velit soluta magnam sequi natus ad ut
+        fugiat harum expedita tenetur at, aliquam odit. Eligendi aliquid ex voluptatem, accusamus
+        quos magni omnis quas ea numquam ut excepturi nostrum optio alias nisi aut. Quas reiciendis
+        ipsa sapiente beatae! Officia debitis labore incidunt, fugiat, ipsa esse molestias optio
+        dolores, repudiandae nesciunt minus aperiam vel tenetur. Est nisi suscipit error corrupti
+        repudiandae totam,
+        <div
+          className=""
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+        >
+          <StoryFn />
+          <StoryFn />
+          <StoryFn />
+        </div>
+        rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque molestiae tenetur
+        harum nam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat accusantium
+        voluptates laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero impedit
+        voluptatibus et. Voluptatem ipsa libero, velit soluta magnam sequi natus ad ut fugiat harum
+        expedita tenetur at, aliquam odit. Eligendi aliquid ex voluptatem, accusamus quos magni
+        omnis quas ea numquam ut excepturi nostrum optio alias nisi aut. Quas reiciendis ipsa
+        sapiente beatae! Officia debitis labore incidunt, fugiat, ipsa esse molestias optio dolores,
+        repudiandae nesciunt minus aperiam vel tenetur. Est nisi suscipit error corrupti repudiandae
+        totam, rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque molestiae
+        tenetur harum nam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
+        accusantium voluptates laborum at, accusamus nulla ipsa facilis nobis dolorum corporis vero
+        impedit voluptatibus et. Voluptatem ipsa libero, velit soluta magnam sequi natus ad ut
+        fugiat harum expedita tenetur at, aliquam odit. Eligendi aliquid ex voluptatem, accusamus
+        quos magni omnis quas ea numquam ut excepturi nostrum optio alias nisi aut. Quas reiciendis
+        ipsa sapiente beatae! Officia debitis labore incidunt, fugiat, ipsa esse molestias optio
+        dolores, repudiandae nesciunt minus aperiam vel tenetur. Est nisi suscipit error corrupti
+        repudiandae totam, rerum aliquid perspiciatis debitis reiciendis fuga architecto cum atque
+        molestiae tenetur harum nam! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Quaerat accusantium voluptates laborum at, accusamus nulla ipsa facilis nobis dolorum
+        corporis vero impedit voluptatibus et. Voluptatem ipsa libero, velit soluta magnam sequi
+        natus ad ut fugiat harum expedita tenetur at, aliquam odit. Eligendi aliquid ex voluptatem,
+        accusamus quos magni omnis quas ea numquam ut excepturi nostrum optio alias nisi aut. Quas
+        reiciendis ipsa sapiente beatae! Officia debitis labore incidunt, fugiat, ipsa esse
+        molestias optio dolores, repudiandae nesciunt minus aperiam vel tenetur. Est nisi suscipit
+        error corrupti repudiandae totam, rerum aliquid perspiciatis debitis reiciendis fuga
+        architecto cum atque molestiae tenetur harum nam! Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quaerat accusantium voluptates laborum at, accusamus nulla ipsa facilis
+        nobis dolorum corporis vero impedit voluptatibus et. Voluptatem ipsa libero, velit soluta
+        magnam sequi natus ad ut fugiat harum expedita tenetur at, aliquam odit. Eligendi aliquid ex
+        voluptatem, accusamus quos magni omnis quas ea numquam ut excepturi nostrum optio alias nisi
+        aut. Quas reiciendis ipsa sapiente beatae! Officia debitis labore incidunt, fugiat, ipsa
+        esse molestias optio dolores, repudiandae nesciunt minus aperiam vel tenetur. Est nisi
+        suscipit error corrupti repudiandae totam, rerum aliquid perspiciatis debitis reiciendis
+        fuga architecto cum atque molestiae tenetur harum nam! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Quaerat accusantium voluptates laborum at, accusamus nulla
+        ipsa facilis nobis dolorum corporis vero impedit voluptatibus et. Voluptatem ipsa libero,
+        velit soluta magnam sequi natus ad ut fugiat harum expedita tenetur at, aliquam odit.
+      </div>
     </div>
   );
 };
@@ -61,7 +114,7 @@ export default {
   tags: ["autodocs"],
   args: {
     label: "Click me!",
-    children: "some text",
+    children: "some text some",
   },
   decorators: [secondaryDecodator],
   argTypes: {

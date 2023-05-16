@@ -1,54 +1,84 @@
+import { getSizesAndCoords } from "./GetSizesAndCoords";
+
 interface calcPreferSideProps {
   btnRef: React.RefObject<HTMLButtonElement>;
   tooltipRef: React.RefObject<HTMLDivElement>;
-  parentElRef: React.RefObject<HTMLDivElement>;
 }
 
-export function calcPreferSide({ btnRef, tooltipRef, parentElRef }: calcPreferSideProps) {
-  if (document && btnRef.current && tooltipRef.current && parentElRef.current) {
-    //   DOM elems
+export function calcPreferSide({ btnRef, tooltipRef }: calcPreferSideProps) {
+  if (document && btnRef.current && tooltipRef.current) {
+    //   DOM elems refs
     const tooltip = tooltipRef.current;
     const triggerBtn = btnRef.current;
-    const parentEl = parentElRef.current;
+    const tooltipArrow = tooltip.querySelector("svg") || null;
 
-    //   Inirial coords
+    //   Initial coords
     const {
-      right,
-      bottom,
-      left: distanceToLeft,
-      top: distanceToTop,
-    } = triggerBtn.getBoundingClientRect();
-
-    const { left: tooltipToLeft, right: tooltipRight, width } = tooltip.getBoundingClientRect();
-
-    const clientW = document.documentElement.clientWidth;
-    const clientH = document.documentElement.clientHeight;
-    const distanceToRight = clientW - right;
-    const distanceToBottom = clientH - bottom;
+      triggerToLeft,
+      triggerToRight,
+      triggerToBottom,
+      triggerToTop,
+      triggerToDocumentLeft,
+      triggerToDocumentTop,
+      tooltipH,
+      tooltipW,
+      triggerW,
+      triggerH,
+    } = getSizesAndCoords(triggerBtn, tooltip);
 
     //   Calc prefer sides
-    const isLeftClipped = tooltipToLeft <= 0;
-    const isRightClipped = clientW - tooltipRight <= 0;
-    const isAlreadyClippedL = parentEl.classList.contains("clip-left");
-    const isAlreadyClippedR = parentEl.classList.contains("clip-right");
+    const isPreferTop = Math.max(triggerToBottom, triggerToTop) === triggerToTop;
+    const isPreferBottom = Math.max(triggerToBottom, triggerToTop) === triggerToBottom;
+    // const isPreferLeft = Math.max(distanceToLeft, distanceToRight) === distanceToLeft;
+    // const isPreferRight = Math.max(distanceToLeft, distanceToRight) === distanceToRight;
 
-    const isOrientY = Math.max(clientW, clientH) === clientH;
+    //  Calc is tooltip is clipped by left/right sides
+    // const isLeftClipped = triggerToLeft <= tooltipW + 20;
+    // const isRightClipped = triggerToRight <= tooltipW + 20;
+    const isLeftClipped =
+      tooltipW > triggerW ? (triggerToLeft > (tooltipW - triggerW) / 2 ? false : true) : false;
 
-    const isPreferTop = Math.max(distanceToBottom, distanceToTop) === distanceToTop;
-    const isPreferBottom = Math.max(distanceToBottom, distanceToTop) === distanceToBottom;
-    const isPreferLeft = Math.max(distanceToLeft, distanceToRight) === distanceToLeft;
-    const isPreferRight = Math.max(distanceToLeft, distanceToRight) === distanceToRight;
+    const isRightClipped =
+      tooltipW > triggerW ? (triggerToRight > (tooltipW - triggerW) / 2 ? false : true) : false;
 
-    if ((isLeftClipped || isAlreadyClippedL) && isPreferTop) return "top clip-left";
-    if ((isLeftClipped || isAlreadyClippedL) && isPreferBottom) return "bottom clip-left";
+    if (isLeftClipped) {
+      if (tooltipW > triggerW) {
+        tooltip.style.left = `${triggerToDocumentLeft}px`;
+        tooltipArrow.style.left = `${triggerW / 2}px`;
+      } else {
+        tooltip.style.left = `${triggerToLeft + triggerW / 2}px`;
+        tooltip.style.transform = `translateX(-50%)`;
+      }
+    } else if (isRightClipped) {
+      if (tooltipW > triggerW) {
+        tooltip.style.right = `${triggerToRight}px`;
+        tooltipArrow.style.left = `${tooltipW - triggerW + triggerW / 2}px`;
+      } else {
+        tooltip.style.right = `${triggerToRight + triggerW / 2}px`;
+        tooltip.style.transform = `translateX(50%)`;
+      }
+    } else {
+      tooltip.style.left = `${triggerToDocumentLeft + triggerW / 2}px`;
+      tooltip.style.transform = `translateX(-50%)`;
+      tooltipArrow.style.left = `50%`;
+    }
 
-    if ((isRightClipped || isAlreadyClippedR) && isPreferTop) return "top clip-right";
-    if ((isRightClipped || isAlreadyClippedR) && isPreferBottom) return "bottom clip-right";
+    // const isOrientY = Math.max(clientW, clientH) === clientH;
 
-    if (isPreferTop) return "top";
-    if (isPreferBottom) return "bottom";
-    if (isPreferLeft) return "left";
-    if (isPreferRight) return "right";
+    if (isPreferTop) {
+      tooltip.style.top = `${triggerToDocumentTop - tooltipH - 10}px`;
+      tooltipArrow.style.bottom = `0px`;
+      tooltipArrow.style.top = `unset`;
+      tooltipArrow.style.transform = `translate(-50%, 90%) rotate(180deg)`;
+    }
+    if (isPreferBottom) {
+      tooltip.style.top = ` ${triggerToDocumentTop + triggerH + 10}px`;
+      tooltipArrow.style.top = `0px`;
+      tooltipArrow.style.bottom = `unset`;
+      tooltipArrow.style.transform = `translate(-50%, -90%)`;
+    }
+    // if (isPreferLeft) return "left";
+    // if (isPreferRight) return "right";
   } else {
     throw new Error(
       "Error in calcPreferSide func. Check that document object is defined and ref to DOM elements is exist"

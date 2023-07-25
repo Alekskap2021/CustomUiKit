@@ -1,0 +1,53 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true
+    },
+    "extends": ["plugin:react/recommended", "plugin:react-hooks/recommended", "airbnb", "prettier"],
+    "parser": "@typescript-eslint/parser",
+
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
+    "ignorePatterns": ["build/**/*"],
+    "rules": {
+        "react/jsx-indent": [2, 4],
+        "react/jsx-indent-props": [2, 4],
+        "react/self-closing-comp": ["warn", { "component": true, "html": false }],
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "error",
+
+        "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".tsx"] }],
+
+        "max-len": [
+            "error",
+            {
+                "code": 100,
+                "tabWidth": 4,
+                "comments": 100,
+                "ignorePattern": "",
+                "ignoreComments": true,
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true,
+                "ignoreRegExpLiterals": true
+            }
+        ],
+
+        "react/function-component-definition": "off",
+        "import/extensions": "off",
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "react/react-in-jsx-scope": "off",
+        "import/no-extraneous-dependencies": "off",
+        "react/jsx-props-no-spreading": "off",
+        "no-unused-expressions": "off"
+    }
+}

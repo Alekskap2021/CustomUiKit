@@ -1,0 +1,230 @@
+:root {
+    --color-primary: #1475e1;
+    --color-primary-hover: #105eb4;
+    --color-success: #1fff20;
+    --color-success-hover: #33c533;
+    --color-danger: #fe2247;
+    --color-danger-hover: #c4233e;
+    --color-text-white: #fff;
+    --color-text-dark: #212121;
+    --transition-delay: 0.3s;
+}
+
+/* Main class */
+.btn {
+    cursor: pointer;
+    border: none;
+    position: relative;
+}
+
+a.btn {
+    text-decoration: none;
+    font-family: sans-serif;
+}
+
+.btn svg {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    transition: opacity var(--transition-delay) ease;
+    pointer-events: none;
+}
+
+/* -------------------------------------------------------------- */
+
+/* Size mods */
+.l {
+    font-size: clamp(20px, 20px + 8 * ((100vw - 320px) / (1600 - 320)), 28px);
+    line-height: clamp(20px, 20px + 8 * ((100vw - 320px) / (1600 - 320)), 28px);
+    padding: clamp(15px, 15px + 5 * ((100vw - 320px) / (1600 - 320)), 20px)
+        clamp(30px, 30px + 10 * ((100vw - 320px) / (1600 - 320)), 40px)
+        clamp(15px, 15px + 5 * ((100vw - 320px) / (1600 - 320)), 20px)
+        clamp(30px, 30px + 10 * ((100vw - 320px) / (1600 - 320)), 40px);
+}
+
+.m {
+    font-size: clamp(16px, 16px + 8 * ((100vw - 320px) / (1600 - 320)), 24px);
+    line-height: clamp(16px, 16px + 8 * ((100vw - 320px) / (1600 - 320)), 24px);
+    padding: clamp(10px, 10px + 5 * ((100vw - 320px) / (1600 - 320)), 15px)
+        clamp(20px, 20px + 10 * ((100vw - 320px) / (1600 - 320)), 30px)
+        clamp(10px, 10px + 5 * ((100vw - 320px) / (1600 - 320)), 15px)
+        clamp(20px, 20px + 10 * ((100vw - 320px) / (1600 - 320)), 30px);
+}
+
+.s {
+    font-size: clamp(12px, 12px + 6 * ((100vw - 320px) / (1600 - 320)), 18px);
+    line-height: clamp(12px, 12px + 6 * ((100vw - 320px) / (1600 - 320)), 18px);
+    padding: clamp(5px, 5px + 5 * ((100vw - 320px) / (1600 - 320)), 10px)
+        clamp(10px, 10px + 10 * ((100vw - 320px) / (1600 - 320)), 20px)
+        clamp(5px, 5px + 5 * ((100vw - 320px) / (1600 - 320)), 10px)
+        clamp(10px, 10px + 10 * ((100vw - 320px) / (1600 - 320)), 20px);
+}
+
+.xs {
+    font-size: clamp(10px, 10px + 6 * ((100vw - 320px) / (1600 - 320)), 16px);
+    line-height: clamp(10px, 10px + 6 * ((100vw - 320px) / (1600 - 320)), 16px);
+    padding: clamp(4px, 4px + 4 * ((100vw - 320px) / (1600 - 320)), 8px)
+        clamp(8px, 8px + 8 * ((100vw - 320px) / (1600 - 320)), 16px)
+        clamp(4px, 4px + 4 * ((100vw - 320px) / (1600 - 320)), 8px)
+        clamp(8px, 8px + 8 * ((100vw - 320px) / (1600 - 320)), 16px);
+}
+
+.full-size {
+    width: 100%;
+}
+
+/* -------------------------------------------------------------- */
+
+/* Views */
+
+/* - Danger view */
+.danger {
+    background-color: var(--color-danger);
+    color: var(--color-text-white);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+
+    svg circle {
+        stroke: var(--color-text-white);
+    }
+
+    &:hover {
+        background-color: var(--color-danger-hover);
+    }
+}
+
+.danger.clip {
+    border: 2px solid var(--color-danger);
+    color: var(--color-danger);
+    background-color: transparent;
+
+    svg circle {
+        stroke: var(--color-danger);
+    }
+
+    &:hover {
+        @extend .danger;
+
+        svg circle {
+            stroke: var(--color-text-white);
+        }
+    }
+}
+
+/* - Primary view */
+.primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    svg circle {
+        stroke: var(--color-text-white);
+    }
+
+    &:hover {
+        background-color: var(--color-primary-hover);
+    }
+}
+
+.primary.clip {
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    background-color: transparent;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    svg circle {
+        stroke: var(--color-primary);
+    }
+
+    &:hover {
+        @extend .primary;
+
+        svg circle {
+            stroke: var(--color-text-white);
+        }
+    }
+}
+
+/* - Success view */
+.success {
+    background-color: var(--color-success);
+    color: var(--color-text-dark);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    svg circle {
+        stroke: var(--color-text-white);
+    }
+
+    &:hover {
+        background-color: var(--color-success-hover);
+    }
+}
+
+.success.clip {
+    border: 2px solid var(--color-success);
+    color: var(--color-success);
+    background-color: transparent;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    svg circle {
+        stroke: var(--color-success);
+    }
+
+    &:hover {
+        @extend .success;
+
+        svg circle {
+            stroke: var(--color-text-white);
+        }
+    }
+}
+
+/* Link view / reset */
+.clear {
+    padding: 0;
+    background-color: transparent;
+}
+
+.clear:hover {
+    opacity: 0.7;
+}
+
+/* -------------------------------------------------------------- */
+
+/* Forms */
+.brick {
+    border-radius: 4px;
+}
+
+.round {
+    border-radius: 50px;
+}
+
+/* -------------------------------------------------------------- */
+
+/* States */
+.loading,
+.loading.clip,
+.loading:hover,
+.loading.clip:hover {
+    color: transparent !important;
+}
+
+.loading svg,
+.loading.clip svg {
+    opacity: 1;
+}
+
+.btn[disabled] {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5;
+}

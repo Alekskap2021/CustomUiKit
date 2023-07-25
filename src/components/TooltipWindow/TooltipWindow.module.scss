@@ -1,0 +1,55 @@
+:root {
+    --color-tooltip-white: #fff;
+    --color-tooltip-dark: #212121;
+    --transition-delay: 0.3s;
+}
+
+.tooltip-window {
+    position: fixed;
+    position: absolute;
+    z-index: 999;
+    box-sizing: border-box;
+    width: max-content;
+    max-width: 65vw;
+    height: max-content;
+    max-height: 50vh;
+    padding: 11px 16px;
+    transition: opacity var(--transition-delay) ease;
+    border-radius: 4px;
+    opacity: 0;
+    background-color: var(--color-tooltip-white);
+    box-shadow: 0 0 20px -4px rgb(0 0 0 / 50%);
+    color: var(--color-tooltip-dark);
+    text-align: center;
+
+    /* overflow: auto; */
+
+    word-break: break-word;
+    pointer-events: none;
+}
+
+.tooltip-window_dark {
+    background-color: var(--color-tooltip-dark);
+    box-shadow: none;
+    color: var(--color-tooltip-white);
+}
+
+.tooltip-window_active {
+    opacity: 1;
+    pointer-events: visible;
+}
+
+.tooltip-window__arrow {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tooltip-window__arrow_visible {
+    opacity: 1;
+    pointer-events: visible;
+}
+
+.tooltip-window__arrow_dark polygon {
+    fill: var(--color-tooltip-dark);
+}

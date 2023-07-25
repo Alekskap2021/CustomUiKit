@@ -1,0 +1,13 @@
+{
+    "extends": ["stylelint-config-standard-scss", "stylelint-config-clean-order"],
+    "plugins": ["stylelint-scss", "stylelint-order"],
+    "rules": {
+        "color-no-invalid-hex": true,
+        "selector-class-pattern": null,
+
+        "at-rule-no-unknown": null,
+        "scss/at-rule-no-unknown": true,
+        "scss/at-extend-no-missing-placeholder": null
+    },
+    "ignoreFiles": ["build/**/*.{scss,sass,css}"]
+}
